@@ -7,6 +7,27 @@ const toggleBtn = document.getElementById("toggleBtn");
 const customValue = document.getElementById("customValue");
 const customUnit = document.getElementById("customUnit");
 const presetBtns = document.querySelectorAll(".preset-btn");
+const themeLightBtn = document.getElementById("themeLight");
+const themeDarkBtn = document.getElementById("themeDark");
+
+// ---- Theme (light / dark) ----
+function applyTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  themeLightBtn.classList.toggle("active", theme === "light");
+  themeDarkBtn.classList.toggle("active", theme === "dark");
+}
+
+function setTheme(theme) {
+  applyTheme(theme);
+  chrome.storage.local.set({ theme });
+}
+
+chrome.storage.local.get("theme", ({ theme }) => {
+  applyTheme(theme === "light" ? "light" : "dark");
+});
+
+themeLightBtn.addEventListener("click", () => setTheme("light"));
+themeDarkBtn.addEventListener("click", () => setTheme("dark"));
 
 // Initialize
 chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
@@ -67,12 +88,24 @@ function getCustomSeconds() {
   return value * multiplier;
 }
 
+// Reflect a given interval into the custom value/unit fields.
+function setCustomFromSeconds(seconds) {
+  if (seconds % 60 === 0) {
+    customUnit.value = "60";
+    customValue.value = seconds / 60;
+  } else {
+    customUnit.value = "1";
+    customValue.value = seconds;
+  }
+}
+
 // Preset buttons
 presetBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
     selectedSeconds = parseInt(btn.dataset.seconds);
     presetBtns.forEach((b) => b.classList.remove("selected"));
     btn.classList.add("selected");
+    setCustomFromSeconds(selectedSeconds);
 
     if (isActive) {
       startRefresh();
