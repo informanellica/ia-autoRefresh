@@ -3,7 +3,7 @@
   "name": "Auto Refresh",
   "version": "1.0.0",
   "description": "Automatically refresh pages at a specified interval",
-  "permissions": ["storage", "tabs", "activeTab", "scripting"],
+  "permissions": ["storage", "tabs"],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {

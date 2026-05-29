@@ -58,23 +58,31 @@ function updateBadge(tabId, intervalSeconds) {
   chrome.action.setBadgeBackgroundColor({ color: "#4CAF50", tabId });
 }
 
-// Save state as URL -> interval mapping for persistence across restarts
+// Save state as URL -> interval mapping for persistence across restarts.
+// Skipped entirely when the user opted out via the "記憶しない" setting.
 function saveState() {
-  const tabIds = [...activeTimers.keys()];
-  if (tabIds.length === 0) {
-    chrome.storage.local.set({ savedRules: {} });
-    return;
-  }
-
-  chrome.tabs.query({}, (tabs) => {
-    const rules = {};
-    for (const tab of tabs) {
-      const timer = activeTimers.get(tab.id);
-      if (timer && tab.url) {
-        rules[tab.url] = timer.interval;
-      }
+  chrome.storage.local.get("rememberState", (cfg) => {
+    if (cfg.rememberState === false) {
+      chrome.storage.local.set({ savedRules: {} });
+      return;
     }
-    chrome.storage.local.set({ savedRules: rules });
+
+    const tabIds = [...activeTimers.keys()];
+    if (tabIds.length === 0) {
+      chrome.storage.local.set({ savedRules: {} });
+      return;
+    }
+
+    chrome.tabs.query({}, (tabs) => {
+      const rules = {};
+      for (const tab of tabs) {
+        const timer = activeTimers.get(tab.id);
+        if (timer && tab.url) {
+          rules[tab.url] = timer.interval;
+        }
+      }
+      chrome.storage.local.set({ savedRules: rules });
+    });
   });
 }
 

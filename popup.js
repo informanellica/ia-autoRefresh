@@ -1,20 +1,31 @@
+const DEFAULT_PRESETS = [5, 10, 30, 60, 180, 300, 600, 1800];
+
 let currentTabId = null;
 let isActive = false;
 let selectedSeconds = 60; // default 1 minute
+let presets = [...DEFAULT_PRESETS];
+let rememberState = true; // persist across browser restart by default
 
 const statusEl = document.getElementById("status");
 const toggleBtn = document.getElementById("toggleBtn");
 const customValue = document.getElementById("customValue");
 const customUnit = document.getElementById("customUnit");
-const presetBtns = document.querySelectorAll(".preset-btn");
-const themeLightBtn = document.getElementById("themeLight");
-const themeDarkBtn = document.getElementById("themeDark");
+const presetsContainer = document.getElementById("presets");
+const themeToggle = document.getElementById("themeToggle");
+
+// Settings panel
+const settingsBtn = document.getElementById("settingsBtn");
+const backBtn = document.getElementById("backBtn");
+const mainView = document.getElementById("mainView");
+const settingsView = document.getElementById("settingsView");
+const presetEditor = document.getElementById("presetEditor");
+const addPresetBtn = document.getElementById("addPresetBtn");
+const rememberToggle = document.getElementById("rememberToggle");
+const saveSettingsBtn = document.getElementById("saveSettingsBtn");
 
 // ---- Theme (light / dark) ----
 function applyTheme(theme) {
   document.documentElement.setAttribute("data-theme", theme);
-  themeLightBtn.classList.toggle("active", theme === "light");
-  themeDarkBtn.classList.toggle("active", theme === "dark");
 }
 
 function setTheme(theme) {
@@ -22,19 +33,26 @@ function setTheme(theme) {
   chrome.storage.local.set({ theme });
 }
 
-chrome.storage.local.get("theme", ({ theme }) => {
-  applyTheme(theme === "light" ? "light" : "dark");
+themeToggle.addEventListener("click", () => {
+  const current = document.documentElement.getAttribute("data-theme");
+  setTheme(current === "dark" ? "light" : "dark");
 });
 
-themeLightBtn.addEventListener("click", () => setTheme("light"));
-themeDarkBtn.addEventListener("click", () => setTheme("dark"));
-
-// Initialize
-chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-  if (tabs[0]) {
-    currentTabId = tabs[0].id;
-    checkStatus();
+// ---- Load persisted settings, then initialize ----
+chrome.storage.local.get(["theme", "presets", "rememberState"], (data) => {
+  applyTheme(data.theme === "light" ? "light" : "dark");
+  if (Array.isArray(data.presets) && data.presets.length) {
+    presets = data.presets;
   }
+  rememberState = data.rememberState !== false;
+  renderPresets();
+
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    if (tabs[0]) {
+      currentTabId = tabs[0].id;
+      checkStatus();
+    }
+  });
 });
 
 function checkStatus() {
@@ -63,14 +81,7 @@ function updateUI() {
     toggleBtn.textContent = "開始";
   }
 
-  // Highlight matching preset
-  presetBtns.forEach((btn) => {
-    if (parseInt(btn.dataset.seconds) === selectedSeconds) {
-      btn.classList.add("selected");
-    } else {
-      btn.classList.remove("selected");
-    }
-  });
+  highlightPreset();
 }
 
 function formatInterval(seconds) {
@@ -99,43 +110,71 @@ function setCustomFromSeconds(seconds) {
   }
 }
 
-// Preset buttons
-presetBtns.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    selectedSeconds = parseInt(btn.dataset.seconds);
-    presetBtns.forEach((b) => b.classList.remove("selected"));
-    btn.classList.add("selected");
-    setCustomFromSeconds(selectedSeconds);
+// Split seconds into a {value, unit} pair for editing.
+function secondsToValueUnit(seconds) {
+  if (seconds % 60 === 0) return { value: seconds / 60, unit: 60 };
+  return { value: seconds, unit: 1 };
+}
 
-    if (isActive) {
-      startRefresh();
-    }
+// ---- Preset rendering ----
+function highlightPreset() {
+  presetsContainer.querySelectorAll(".preset-btn").forEach((btn) => {
+    btn.classList.toggle(
+      "selected",
+      parseInt(btn.dataset.seconds) === selectedSeconds
+    );
   });
+}
+
+function clearPresetSelection() {
+  presetsContainer
+    .querySelectorAll(".preset-btn")
+    .forEach((b) => b.classList.remove("selected"));
+}
+
+function renderPresets() {
+  presetsContainer.innerHTML = "";
+  presets.forEach((seconds) => {
+    const btn = document.createElement("button");
+    btn.className = "preset-btn";
+    btn.dataset.seconds = seconds;
+    btn.textContent = formatInterval(seconds);
+    btn.addEventListener("click", () => {
+      selectedSeconds = seconds;
+      highlightPreset();
+      setCustomFromSeconds(seconds);
+      if (isActive) {
+        startRefresh();
+      }
+    });
+    presetsContainer.appendChild(btn);
+  });
+  highlightPreset();
+}
+
+// ---- Custom input: clear preset selection when editing ----
+customValue.addEventListener("input", () => {
+  clearPresetSelection();
+  selectedSeconds = getCustomSeconds();
 });
 
-// Toggle button
+customUnit.addEventListener("change", () => {
+  clearPresetSelection();
+  selectedSeconds = getCustomSeconds();
+});
+
+// ---- Toggle button ----
 toggleBtn.addEventListener("click", () => {
   if (isActive) {
     stopRefresh();
   } else {
     // Use preset if selected, otherwise use custom
-    const hasPreset = document.querySelector(".preset-btn.selected");
+    const hasPreset = presetsContainer.querySelector(".preset-btn.selected");
     if (!hasPreset) {
       selectedSeconds = getCustomSeconds();
     }
     startRefresh();
   }
-});
-
-// Custom input: clear preset selection when editing
-customValue.addEventListener("input", () => {
-  presetBtns.forEach((b) => b.classList.remove("selected"));
-  selectedSeconds = getCustomSeconds();
-});
-
-customUnit.addEventListener("change", () => {
-  presetBtns.forEach((b) => b.classList.remove("selected"));
-  selectedSeconds = getCustomSeconds();
 });
 
 function startRefresh() {
@@ -157,3 +196,90 @@ function stopRefresh() {
     }
   );
 }
+
+// ---- Settings panel ----
+function openSettings() {
+  rememberToggle.checked = !rememberState;
+  renderPresetEditor();
+  mainView.hidden = true;
+  settingsView.hidden = false;
+}
+
+function closeSettings() {
+  settingsView.hidden = true;
+  mainView.hidden = false;
+}
+
+function addPresetRow(seconds) {
+  const { value, unit } = secondsToValueUnit(seconds);
+
+  const row = document.createElement("div");
+  row.className = "preset-row";
+
+  const input = document.createElement("input");
+  input.type = "number";
+  input.min = "1";
+  input.value = value;
+  input.className = "preset-input";
+
+  const select = document.createElement("select");
+  select.className = "preset-unit";
+  const optSec = new Option("秒", "1", unit === 1, unit === 1);
+  const optMin = new Option("分", "60", unit === 60, unit === 60);
+  select.appendChild(optSec);
+  select.appendChild(optMin);
+
+  const del = document.createElement("button");
+  del.className = "del-btn";
+  del.type = "button";
+  del.textContent = "×";
+  del.title = "削除";
+  del.addEventListener("click", () => row.remove());
+
+  row.appendChild(input);
+  row.appendChild(select);
+  row.appendChild(del);
+  presetEditor.appendChild(row);
+}
+
+function renderPresetEditor() {
+  presetEditor.innerHTML = "";
+  presets.forEach((seconds) => addPresetRow(seconds));
+}
+
+function collectPresets() {
+  const rows = presetEditor.querySelectorAll(".preset-row");
+  const result = [];
+  rows.forEach((row) => {
+    const value = parseInt(row.querySelector(".preset-input").value);
+    const unit = parseInt(row.querySelector(".preset-unit").value);
+    if (value && value > 0) {
+      const seconds = value * unit;
+      if (!result.includes(seconds)) result.push(seconds);
+    }
+  });
+  return result;
+}
+
+settingsBtn.addEventListener("click", openSettings);
+backBtn.addEventListener("click", closeSettings);
+addPresetBtn.addEventListener("click", () => addPresetRow(60));
+
+saveSettingsBtn.addEventListener("click", () => {
+  const newPresets = collectPresets();
+  if (newPresets.length) {
+    presets = newPresets;
+  } else {
+    presets = [...DEFAULT_PRESETS];
+  }
+  rememberState = !rememberToggle.checked;
+
+  chrome.storage.local.set({ presets, rememberState });
+  // If the user opted out of persistence, drop any saved rules immediately.
+  if (!rememberState) {
+    chrome.storage.local.set({ savedRules: {} });
+  }
+
+  renderPresets();
+  closeSettings();
+});
