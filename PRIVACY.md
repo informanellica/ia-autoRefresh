@@ -31,4 +31,4 @@ not inspect page content.
 
 ## Contact
 
-Questions about this policy: https://informanellica.com
+Questions about this policy: support@informanellica.com
