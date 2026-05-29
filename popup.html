@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 280px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #1a1a2e;
+      color: #e0e0e0;
+      padding: 16px;
+    }
+
+    h1 {
+      font-size: 15px;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 14px;
+      color: #fff;
+    }
+
+    .status {
+      text-align: center;
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      margin-bottom: 14px;
+      font-weight: 500;
+    }
+
+    .status.active {
+      background: rgba(76, 175, 80, 0.15);
+      color: #81c784;
+      border: 1px solid rgba(76, 175, 80, 0.3);
+    }
+
+    .status.inactive {
+      background: rgba(255, 255, 255, 0.05);
+      color: #888;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .preset-label {
+      font-size: 11px;
+      color: #999;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .presets {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .preset-btn {
+      padding: 7px 0;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.05);
+      color: #ccc;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 500;
+      transition: all 0.15s;
+    }
+
+    .preset-btn:hover {
+      background: rgba(76, 175, 80, 0.15);
+      border-color: rgba(76, 175, 80, 0.4);
+      color: #fff;
+    }
+
+    .preset-btn.selected {
+      background: rgba(76, 175, 80, 0.25);
+      border-color: #4CAF50;
+      color: #81c784;
+    }
+
+    .custom-row {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 14px;
+      align-items: center;
+    }
+
+    .custom-row label {
+      font-size: 11px;
+      color: #999;
+      white-space: nowrap;
+    }
+
+    .custom-row input {
+      flex: 1;
+      padding: 6px 8px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      border-radius: 6px;
+      font-size: 13px;
+      outline: none;
+      width: 60px;
+    }
+
+    .custom-row input:focus {
+      border-color: rgba(76, 175, 80, 0.5);
+    }
+
+    .custom-row select {
+      padding: 6px 4px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      border-radius: 6px;
+      font-size: 12px;
+      outline: none;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-start {
+      background: #4CAF50;
+      color: #fff;
+    }
+
+    .btn-start:hover {
+      background: #43a047;
+    }
+
+    .btn-stop {
+      background: #e53935;
+      color: #fff;
+    }
+
+    .btn-stop:hover {
+      background: #c62828;
+    }
+  </style>
+</head>
+<body>
+  <h1>Auto Refresh</h1>
+
+  <div id="status" class="status inactive">停止中</div>
+
+  <div class="preset-label">プリセット</div>
+  <div class="presets">
+    <button class="preset-btn" data-seconds="5">5秒</button>
+    <button class="preset-btn" data-seconds="10">10秒</button>
+    <button class="preset-btn" data-seconds="30">30秒</button>
+    <button class="preset-btn" data-seconds="60">1分</button>
+    <button class="preset-btn" data-seconds="180">3分</button>
+    <button class="preset-btn" data-seconds="300">5分</button>
+    <button class="preset-btn" data-seconds="600">10分</button>
+    <button class="preset-btn" data-seconds="1800">30分</button>
+  </div>
+
+  <div class="custom-row">
+    <label>カスタム:</label>
+    <input type="number" id="customValue" min="1" value="15" />
+    <select id="customUnit">
+      <option value="1">秒</option>
+      <option value="60" selected>分</option>
+    </select>
+  </div>
+
+  <button id="toggleBtn" class="btn btn-start">開始</button>
+
+  <script src="popup.js"></script>
+</body>
+</html>
