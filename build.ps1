@@ -13,7 +13,8 @@ $include = @(
   'background.js',
   'popup.html',
   'popup.js',
-  'icons'
+  'icons',
+  '_locales'
 )
 
 $missing = $include | Where-Object { -not (Test-Path (Join-Path $root $_)) }

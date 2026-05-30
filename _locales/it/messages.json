@@ -1,0 +1,73 @@
+{
+  "appName": {
+    "message": "Auto Refresh"
+  },
+  "appDesc": {
+    "message": "Ricarica automaticamente qualsiasi scheda all'intervallo scelto — per scheda, con preset, timer personalizzato e un badge a colpo d'occhio."
+  },
+  "settings": {
+    "message": "Impostazioni"
+  },
+  "toggleTheme": {
+    "message": "Attiva/disattiva tema chiaro/scuro"
+  },
+  "statusInactive": {
+    "message": "Fermato"
+  },
+  "refreshingEvery": {
+    "message": "Aggiornamento ogni $interval$",
+    "placeholders": {
+      "interval": {
+        "content": "$1"
+      }
+    }
+  },
+  "presetsLabel": {
+    "message": "Preset"
+  },
+  "customLabel": {
+    "message": "Personalizzato:"
+  },
+  "optSeconds": {
+    "message": "Secondi"
+  },
+  "optMinutes": {
+    "message": "Minuti"
+  },
+  "unitSec": {
+    "message": "s"
+  },
+  "unitMin": {
+    "message": "min"
+  },
+  "unitHour": {
+    "message": "h"
+  },
+  "start": {
+    "message": "Avvia"
+  },
+  "stop": {
+    "message": "Ferma"
+  },
+  "back": {
+    "message": "Indietro"
+  },
+  "editPresetsLabel": {
+    "message": "Modifica preset"
+  },
+  "addPreset": {
+    "message": "+ Aggiungi preset"
+  },
+  "restartBehaviorLabel": {
+    "message": "Al riavvio"
+  },
+  "dontRemember": {
+    "message": "Non ricordare lo stato (nessuna ripresa dopo il riavvio)"
+  },
+  "save": {
+    "message": "Salva"
+  },
+  "delete": {
+    "message": "Elimina"
+  }
+}

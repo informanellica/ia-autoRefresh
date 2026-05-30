@@ -1,0 +1,73 @@
+{
+  "appName": {
+    "message": "Auto Refresh"
+  },
+  "appDesc": {
+    "message": "Lade jeden Tab automatisch im gewählten Intervall neu — pro Tab, mit Voreinstellungen, eigenem Timer und einem Badge auf einen Blick."
+  },
+  "settings": {
+    "message": "Einstellungen"
+  },
+  "toggleTheme": {
+    "message": "Helles/dunkles Design umschalten"
+  },
+  "statusInactive": {
+    "message": "Gestoppt"
+  },
+  "refreshingEvery": {
+    "message": "Aktualisierung alle $interval$",
+    "placeholders": {
+      "interval": {
+        "content": "$1"
+      }
+    }
+  },
+  "presetsLabel": {
+    "message": "Voreinstellungen"
+  },
+  "customLabel": {
+    "message": "Benutzerdef.:"
+  },
+  "optSeconds": {
+    "message": "Sekunden"
+  },
+  "optMinutes": {
+    "message": "Minuten"
+  },
+  "unitSec": {
+    "message": "s"
+  },
+  "unitMin": {
+    "message": "m"
+  },
+  "unitHour": {
+    "message": "h"
+  },
+  "start": {
+    "message": "Start"
+  },
+  "stop": {
+    "message": "Stopp"
+  },
+  "back": {
+    "message": "Zurück"
+  },
+  "editPresetsLabel": {
+    "message": "Voreinstellungen bearbeiten"
+  },
+  "addPreset": {
+    "message": "+ Voreinstellung hinzufügen"
+  },
+  "restartBehaviorLabel": {
+    "message": "Beim Neustart"
+  },
+  "dontRemember": {
+    "message": "Status nicht merken (kein automatisches Fortsetzen nach Neustart)"
+  },
+  "save": {
+    "message": "Speichern"
+  },
+  "delete": {
+    "message": "Löschen"
+  }
+}

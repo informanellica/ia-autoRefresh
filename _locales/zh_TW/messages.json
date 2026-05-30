@@ -1,0 +1,73 @@
+{
+  "appName": {
+    "message": "Auto Refresh"
+  },
+  "appDesc": {
+    "message": "依所選間隔自動重新整理任意分頁——逐分頁設定，含預設、自訂計時器與一目了然的角標。"
+  },
+  "settings": {
+    "message": "設定"
+  },
+  "toggleTheme": {
+    "message": "切換淺色/深色主題"
+  },
+  "statusInactive": {
+    "message": "已停止"
+  },
+  "refreshingEvery": {
+    "message": "每 $interval$ 重新整理一次",
+    "placeholders": {
+      "interval": {
+        "content": "$1"
+      }
+    }
+  },
+  "presetsLabel": {
+    "message": "預設"
+  },
+  "customLabel": {
+    "message": "自訂："
+  },
+  "optSeconds": {
+    "message": "秒"
+  },
+  "optMinutes": {
+    "message": "分鐘"
+  },
+  "unitSec": {
+    "message": "秒"
+  },
+  "unitMin": {
+    "message": "分"
+  },
+  "unitHour": {
+    "message": "時"
+  },
+  "start": {
+    "message": "開始"
+  },
+  "stop": {
+    "message": "停止"
+  },
+  "back": {
+    "message": "返回"
+  },
+  "editPresetsLabel": {
+    "message": "編輯預設"
+  },
+  "addPreset": {
+    "message": "＋ 新增預設"
+  },
+  "restartBehaviorLabel": {
+    "message": "重新啟動時"
+  },
+  "dontRemember": {
+    "message": "不記住狀態（重新啟動後不自動恢復）"
+  },
+  "save": {
+    "message": "儲存"
+  },
+  "delete": {
+    "message": "刪除"
+  }
+}

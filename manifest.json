@@ -1,8 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "Auto Refresh",
-  "version": "1.0.1",
-  "description": "Automatically refresh pages at a specified interval",
+  "name": "__MSG_appName__",
+  "version": "1.0.2",
+  "default_locale": "en",
+  "description": "__MSG_appDesc__",
   "permissions": ["storage", "tabs"],
   "action": {
     "default_popup": "popup.html",

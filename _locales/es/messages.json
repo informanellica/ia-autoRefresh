@@ -1,0 +1,73 @@
+{
+  "appName": {
+    "message": "Auto Refresh"
+  },
+  "appDesc": {
+    "message": "Recarga automáticamente cualquier pestaña en el intervalo que elijas: por pestaña, con preajustes, temporizador personalizado y una insignia a la vista."
+  },
+  "settings": {
+    "message": "Configuración"
+  },
+  "toggleTheme": {
+    "message": "Cambiar tema claro/oscuro"
+  },
+  "statusInactive": {
+    "message": "Detenido"
+  },
+  "refreshingEvery": {
+    "message": "Actualizando cada $interval$",
+    "placeholders": {
+      "interval": {
+        "content": "$1"
+      }
+    }
+  },
+  "presetsLabel": {
+    "message": "Preajustes"
+  },
+  "customLabel": {
+    "message": "Personalizado:"
+  },
+  "optSeconds": {
+    "message": "Segundos"
+  },
+  "optMinutes": {
+    "message": "Minutos"
+  },
+  "unitSec": {
+    "message": "s"
+  },
+  "unitMin": {
+    "message": "min"
+  },
+  "unitHour": {
+    "message": "h"
+  },
+  "start": {
+    "message": "Iniciar"
+  },
+  "stop": {
+    "message": "Detener"
+  },
+  "back": {
+    "message": "Atrás"
+  },
+  "editPresetsLabel": {
+    "message": "Editar preajustes"
+  },
+  "addPreset": {
+    "message": "+ Añadir preajuste"
+  },
+  "restartBehaviorLabel": {
+    "message": "Al reiniciar"
+  },
+  "dontRemember": {
+    "message": "No recordar el estado (sin reanudar tras reiniciar)"
+  },
+  "save": {
+    "message": "Guardar"
+  },
+  "delete": {
+    "message": "Eliminar"
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "appName": {
+    "message": "Auto Refresh"
+  },
+  "appDesc": {
+    "message": "Automatically reload any tab at the interval you choose — per tab, with presets, a custom timer, and an at-a-glance badge."
+  },
+  "settings": {
+    "message": "Settings"
+  },
+  "toggleTheme": {
+    "message": "Toggle light/dark theme"
+  },
+  "statusInactive": {
+    "message": "Stopped"
+  },
+  "refreshingEvery": {
+    "message": "Refreshing every $interval$",
+    "placeholders": {
+      "interval": {
+        "content": "$1"
+      }
+    }
+  },
+  "presetsLabel": {
+    "message": "Presets"
+  },
+  "customLabel": {
+    "message": "Custom:"
+  },
+  "optSeconds": {
+    "message": "Seconds"
+  },
+  "optMinutes": {
+    "message": "Minutes"
+  },
+  "unitSec": {
+    "message": "s"
+  },
+  "unitMin": {
+    "message": "m"
+  },
+  "unitHour": {
+    "message": "h"
+  },
+  "start": {
+    "message": "Start"
+  },
+  "stop": {
+    "message": "Stop"
+  },
+  "back": {
+    "message": "Back"
+  },
+  "editPresetsLabel": {
+    "message": "Edit presets"
+  },
+  "addPreset": {
+    "message": "+ Add preset"
+  },
+  "restartBehaviorLabel": {
+    "message": "On restart"
+  },
+  "dontRemember": {
+    "message": "Don't remember state (no auto-resume after restart)"
+  },
+  "save": {
+    "message": "Save"
+  },
+  "delete": {
+    "message": "Delete"
+  }
+}

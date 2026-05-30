@@ -14,6 +14,7 @@ include=(
   popup.html
   popup.js
   icons
+  _locales
 )
 
 missing=()

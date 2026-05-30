@@ -1,0 +1,73 @@
+{
+  "appName": {
+    "message": "Auto Refresh"
+  },
+  "appDesc": {
+    "message": "按所选间隔自动刷新任意标签页——逐标签设置，含预设、自定义计时器和一目了然的角标。"
+  },
+  "settings": {
+    "message": "设置"
+  },
+  "toggleTheme": {
+    "message": "切换浅色/深色主题"
+  },
+  "statusInactive": {
+    "message": "已停止"
+  },
+  "refreshingEvery": {
+    "message": "每 $interval$ 刷新一次",
+    "placeholders": {
+      "interval": {
+        "content": "$1"
+      }
+    }
+  },
+  "presetsLabel": {
+    "message": "预设"
+  },
+  "customLabel": {
+    "message": "自定义："
+  },
+  "optSeconds": {
+    "message": "秒"
+  },
+  "optMinutes": {
+    "message": "分钟"
+  },
+  "unitSec": {
+    "message": "秒"
+  },
+  "unitMin": {
+    "message": "分"
+  },
+  "unitHour": {
+    "message": "时"
+  },
+  "start": {
+    "message": "开始"
+  },
+  "stop": {
+    "message": "停止"
+  },
+  "back": {
+    "message": "返回"
+  },
+  "editPresetsLabel": {
+    "message": "编辑预设"
+  },
+  "addPreset": {
+    "message": "＋ 添加预设"
+  },
+  "restartBehaviorLabel": {
+    "message": "重启时"
+  },
+  "dontRemember": {
+    "message": "不记忆状态（重启后不自动恢复）"
+  },
+  "save": {
+    "message": "保存"
+  },
+  "delete": {
+    "message": "删除"
+  }
+}

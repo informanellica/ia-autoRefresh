@@ -1,0 +1,73 @@
+{
+  "appName": {
+    "message": "Auto Refresh"
+  },
+  "appDesc": {
+    "message": "Автоматически перезагружайте любую вкладку с выбранным интервалом — для каждой вкладки, с пресетами, своим таймером и значком на кнопке."
+  },
+  "settings": {
+    "message": "Настройки"
+  },
+  "toggleTheme": {
+    "message": "Светлая/тёмная тема"
+  },
+  "statusInactive": {
+    "message": "Остановлено"
+  },
+  "refreshingEvery": {
+    "message": "Обновление каждые $interval$",
+    "placeholders": {
+      "interval": {
+        "content": "$1"
+      }
+    }
+  },
+  "presetsLabel": {
+    "message": "Пресеты"
+  },
+  "customLabel": {
+    "message": "Свой:"
+  },
+  "optSeconds": {
+    "message": "Секунды"
+  },
+  "optMinutes": {
+    "message": "Минуты"
+  },
+  "unitSec": {
+    "message": "с"
+  },
+  "unitMin": {
+    "message": "м"
+  },
+  "unitHour": {
+    "message": "ч"
+  },
+  "start": {
+    "message": "Старт"
+  },
+  "stop": {
+    "message": "Стоп"
+  },
+  "back": {
+    "message": "Назад"
+  },
+  "editPresetsLabel": {
+    "message": "Изменить пресеты"
+  },
+  "addPreset": {
+    "message": "+ Добавить пресет"
+  },
+  "restartBehaviorLabel": {
+    "message": "При перезапуске"
+  },
+  "dontRemember": {
+    "message": "Не запоминать состояние (без автозапуска после перезапуска)"
+  },
+  "save": {
+    "message": "Сохранить"
+  },
+  "delete": {
+    "message": "Удалить"
+  }
+}

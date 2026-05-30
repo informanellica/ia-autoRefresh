@@ -1,0 +1,73 @@
+{
+  "appName": {
+    "message": "Auto Refresh"
+  },
+  "appDesc": {
+    "message": "Rechargez automatiquement n'importe quel onglet à l'intervalle choisi — par onglet, avec préréglages, minuteur personnalisé et un badge visible."
+  },
+  "settings": {
+    "message": "Paramètres"
+  },
+  "toggleTheme": {
+    "message": "Basculer thème clair/sombre"
+  },
+  "statusInactive": {
+    "message": "Arrêté"
+  },
+  "refreshingEvery": {
+    "message": "Actualisation toutes les $interval$",
+    "placeholders": {
+      "interval": {
+        "content": "$1"
+      }
+    }
+  },
+  "presetsLabel": {
+    "message": "Préréglages"
+  },
+  "customLabel": {
+    "message": "Personnalisé :"
+  },
+  "optSeconds": {
+    "message": "Secondes"
+  },
+  "optMinutes": {
+    "message": "Minutes"
+  },
+  "unitSec": {
+    "message": "s"
+  },
+  "unitMin": {
+    "message": "min"
+  },
+  "unitHour": {
+    "message": "h"
+  },
+  "start": {
+    "message": "Démarrer"
+  },
+  "stop": {
+    "message": "Arrêter"
+  },
+  "back": {
+    "message": "Retour"
+  },
+  "editPresetsLabel": {
+    "message": "Modifier les préréglages"
+  },
+  "addPreset": {
+    "message": "+ Ajouter un préréglage"
+  },
+  "restartBehaviorLabel": {
+    "message": "Au redémarrage"
+  },
+  "dontRemember": {
+    "message": "Ne pas mémoriser l'état (pas de reprise après redémarrage)"
+  },
+  "save": {
+    "message": "Enregistrer"
+  },
+  "delete": {
+    "message": "Supprimer"
+  }
+}

@@ -23,6 +23,24 @@ const addPresetBtn = document.getElementById("addPresetBtn");
 const rememberToggle = document.getElementById("rememberToggle");
 const saveSettingsBtn = document.getElementById("saveSettingsBtn");
 
+// --- i18n: fill static markup and expose a getter for dynamic strings ---
+const t = (key, subs) => chrome.i18n.getMessage(key, subs);
+function applyI18n() {
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    const m = t(el.dataset.i18n);
+    if (m) el.textContent = m;
+  });
+  document.querySelectorAll("[data-i18n-title]").forEach((el) => {
+    const m = t(el.dataset.i18nTitle);
+    if (m) el.title = m;
+  });
+  document.querySelectorAll("[data-i18n-aria]").forEach((el) => {
+    const m = t(el.dataset.i18nAria);
+    if (m) el.setAttribute("aria-label", m);
+  });
+}
+applyI18n();
+
 // ---- Theme: default light, follow system, manual override remembered ----
 let manualTheme; // "light" | "dark" | undefined (= follow system)
 
@@ -93,14 +111,14 @@ function checkStatus() {
 function updateUI() {
   if (isActive) {
     statusEl.className = "status active";
-    statusEl.textContent = formatInterval(selectedSeconds) + "ごとに更新中";
+    statusEl.textContent = t("refreshingEvery", [formatInterval(selectedSeconds)]);
     toggleBtn.className = "btn btn-stop";
-    toggleBtn.textContent = "停止";
+    toggleBtn.textContent = t("stop");
   } else {
     statusEl.className = "status inactive";
-    statusEl.textContent = "停止中";
+    statusEl.textContent = t("statusInactive");
     toggleBtn.className = "btn btn-start";
-    toggleBtn.textContent = "開始";
+    toggleBtn.textContent = t("start");
   }
 
   highlightPreset();
@@ -108,11 +126,11 @@ function updateUI() {
 
 function formatInterval(seconds) {
   if (seconds >= 3600) {
-    return Math.floor(seconds / 3600) + "時間";
+    return Math.floor(seconds / 3600) + t("unitHour");
   } else if (seconds >= 60) {
-    return Math.floor(seconds / 60) + "分";
+    return Math.floor(seconds / 60) + t("unitMin");
   }
-  return seconds + "秒";
+  return seconds + t("unitSec");
 }
 
 function getCustomSeconds() {
@@ -246,8 +264,8 @@ function addPresetRow(seconds) {
 
   const select = document.createElement("select");
   select.className = "preset-unit";
-  const optSec = new Option("秒", "1", unit === 1, unit === 1);
-  const optMin = new Option("分", "60", unit === 60, unit === 60);
+  const optSec = new Option(t("optSeconds"), "1", unit === 1, unit === 1);
+  const optMin = new Option(t("optMinutes"), "60", unit === 60, unit === 60);
   select.appendChild(optSec);
   select.appendChild(optMin);
 
@@ -255,7 +273,7 @@ function addPresetRow(seconds) {
   del.className = "del-btn";
   del.type = "button";
   del.textContent = "×";
-  del.title = "削除";
+  del.title = t("delete");
   del.addEventListener("click", () => row.remove());
 
   row.appendChild(input);

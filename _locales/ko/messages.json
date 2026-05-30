@@ -1,0 +1,73 @@
+{
+  "appName": {
+    "message": "Auto Refresh"
+  },
+  "appDesc": {
+    "message": "원하는 간격으로 모든 탭을 자동 새로고침 — 탭별 설정, 프리셋, 사용자 지정 타이머, 한눈에 보이는 배지."
+  },
+  "settings": {
+    "message": "설정"
+  },
+  "toggleTheme": {
+    "message": "밝은/어두운 테마 전환"
+  },
+  "statusInactive": {
+    "message": "중지됨"
+  },
+  "refreshingEvery": {
+    "message": "$interval$마다 새로고침 중",
+    "placeholders": {
+      "interval": {
+        "content": "$1"
+      }
+    }
+  },
+  "presetsLabel": {
+    "message": "프리셋"
+  },
+  "customLabel": {
+    "message": "사용자 지정:"
+  },
+  "optSeconds": {
+    "message": "초"
+  },
+  "optMinutes": {
+    "message": "분"
+  },
+  "unitSec": {
+    "message": "초"
+  },
+  "unitMin": {
+    "message": "분"
+  },
+  "unitHour": {
+    "message": "시간"
+  },
+  "start": {
+    "message": "시작"
+  },
+  "stop": {
+    "message": "중지"
+  },
+  "back": {
+    "message": "뒤로"
+  },
+  "editPresetsLabel": {
+    "message": "프리셋 편집"
+  },
+  "addPreset": {
+    "message": "＋ 프리셋 추가"
+  },
+  "restartBehaviorLabel": {
+    "message": "재시작 시"
+  },
+  "dontRemember": {
+    "message": "상태를 기억하지 않음(재시작 후 자동 재개 안 함)"
+  },
+  "save": {
+    "message": "저장"
+  },
+  "delete": {
+    "message": "삭제"
+  }
+}

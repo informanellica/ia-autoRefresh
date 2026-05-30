@@ -1,0 +1,73 @@
+{
+  "appName": {
+    "message": "Auto Refresh"
+  },
+  "appDesc": {
+    "message": "Recarregue automaticamente qualquer aba no intervalo que você escolher — por aba, com predefinições, timer personalizado e um selo visível."
+  },
+  "settings": {
+    "message": "Configurações"
+  },
+  "toggleTheme": {
+    "message": "Alternar tema claro/escuro"
+  },
+  "statusInactive": {
+    "message": "Parado"
+  },
+  "refreshingEvery": {
+    "message": "Atualizando a cada $interval$",
+    "placeholders": {
+      "interval": {
+        "content": "$1"
+      }
+    }
+  },
+  "presetsLabel": {
+    "message": "Predefinições"
+  },
+  "customLabel": {
+    "message": "Personalizado:"
+  },
+  "optSeconds": {
+    "message": "Segundos"
+  },
+  "optMinutes": {
+    "message": "Minutos"
+  },
+  "unitSec": {
+    "message": "s"
+  },
+  "unitMin": {
+    "message": "min"
+  },
+  "unitHour": {
+    "message": "h"
+  },
+  "start": {
+    "message": "Iniciar"
+  },
+  "stop": {
+    "message": "Parar"
+  },
+  "back": {
+    "message": "Voltar"
+  },
+  "editPresetsLabel": {
+    "message": "Editar predefinições"
+  },
+  "addPreset": {
+    "message": "+ Adicionar predefinição"
+  },
+  "restartBehaviorLabel": {
+    "message": "Ao reiniciar"
+  },
+  "dontRemember": {
+    "message": "Não lembrar o estado (sem retomar após reiniciar)"
+  },
+  "save": {
+    "message": "Salvar"
+  },
+  "delete": {
+    "message": "Excluir"
+  }
+}

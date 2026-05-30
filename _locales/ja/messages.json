@@ -1,0 +1,73 @@
+{
+  "appName": {
+    "message": "Auto Refresh"
+  },
+  "appDesc": {
+    "message": "指定した間隔でタブを自動再読み込み。タブごとに設定でき、プリセット・カスタム間隔・ひと目で分かるバッジ付き。"
+  },
+  "settings": {
+    "message": "設定"
+  },
+  "toggleTheme": {
+    "message": "テーマ切替"
+  },
+  "statusInactive": {
+    "message": "停止中"
+  },
+  "refreshingEvery": {
+    "message": "$interval$ ごとに更新中",
+    "placeholders": {
+      "interval": {
+        "content": "$1"
+      }
+    }
+  },
+  "presetsLabel": {
+    "message": "プリセット"
+  },
+  "customLabel": {
+    "message": "カスタム:"
+  },
+  "optSeconds": {
+    "message": "秒"
+  },
+  "optMinutes": {
+    "message": "分"
+  },
+  "unitSec": {
+    "message": "秒"
+  },
+  "unitMin": {
+    "message": "分"
+  },
+  "unitHour": {
+    "message": "時間"
+  },
+  "start": {
+    "message": "開始"
+  },
+  "stop": {
+    "message": "停止"
+  },
+  "back": {
+    "message": "戻る"
+  },
+  "editPresetsLabel": {
+    "message": "プリセット編集"
+  },
+  "addPreset": {
+    "message": "＋ プリセットを追加"
+  },
+  "restartBehaviorLabel": {
+    "message": "再起動時の動作"
+  },
+  "dontRemember": {
+    "message": "状態を記憶しない（再起動後に自動再開しない）"
+  },
+  "save": {
+    "message": "保存"
+  },
+  "delete": {
+    "message": "削除"
+  }
+}
