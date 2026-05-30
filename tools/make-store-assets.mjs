@@ -27,7 +27,7 @@ const CONFIG = {
   version: "1.0.2",
   summaryEN: "Automatically reload any tab at the interval you choose — per tab, with presets, a custom timer, and an at-a-glance badge.",
   summaryJA: "指定した間隔でタブを自動再読み込み。タブごとに設定でき、プリセット・カスタム間隔・ひと目で分かるバッジ付き。",
-  homepage: "https://informanellica.com",
+  homepage: "https://informanellica.github.io/",
   support: "https://github.com/informanellica/ia-autoRefresh",
   singlePurpose: "Automatically reload browser tabs at a user-defined interval.",
   // Store "Description" (16,000 chars) per language — paste into the listing.
