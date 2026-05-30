@@ -29,6 +29,21 @@ const CONFIG = {
   summaryJA: "指定した間隔でタブを自動再読み込み。タブごとに設定でき、プリセット・カスタム間隔・ひと目で分かるバッジ付き。",
   homepage: "https://informanellica.com",
   support: "https://github.com/informanellica/ia-autoRefresh",
+  singlePurpose: "Automatically reload browser tabs at a user-defined interval.",
+  // Store "Description" (16,000 chars) per language — paste into the listing.
+  desc: {
+    en: "Auto Refresh reloads any tab automatically at the interval you choose — per tab, with handy presets, a custom timer (seconds or minutes), a toolbar badge, and optional resume after restart. Light and dark themes that follow your system. Everything runs locally: no data is collected and no network requests are made.",
+    ja: "Auto Refresh は、選んだ間隔でタブを自動的に再読み込みします。タブごとに設定でき、便利なプリセット・カスタム間隔(秒/分)・ツールバーのバッジ・再起動後の自動再開(任意)に対応。システムに追従するライト/ダークテーマ。すべて端末内で動作し、データ収集や通信は一切行いません。",
+    es: "Auto Refresh recarga cualquier pestaña automáticamente en el intervalo que elijas: por pestaña, con preajustes prácticos, temporizador personalizado (segundos o minutos), insignia en la barra y reanudación opcional tras reiniciar. Temas claro y oscuro que siguen tu sistema. Todo funciona localmente: no se recopilan datos ni se hacen peticiones de red.",
+    pt_BR: "O Auto Refresh recarrega qualquer aba automaticamente no intervalo que você escolher — por aba, com predefinições práticas, timer personalizado (segundos ou minutos), selo na barra e retomada opcional após reiniciar. Temas claro e escuro que acompanham o sistema. Tudo funciona localmente: nenhum dado é coletado e nenhuma requisição de rede é feita.",
+    fr: "Auto Refresh recharge automatiquement n'importe quel onglet à l'intervalle choisi — par onglet, avec des préréglages pratiques, un minuteur personnalisé (secondes ou minutes), un badge dans la barre d'outils et une reprise facultative après redémarrage. Thèmes clair et sombre qui suivent votre système. Tout fonctionne en local : aucune donnée collectée, aucune requête réseau.",
+    de: "Auto Refresh lädt jeden Tab automatisch im gewählten Intervall neu — pro Tab, mit praktischen Voreinstellungen, eigenem Timer (Sekunden oder Minuten), einem Symbol-Badge und optionaler Fortsetzung nach dem Neustart. Helles und dunkles Design, das deinem System folgt. Alles läuft lokal: keine Datenerfassung, keine Netzwerkanfragen.",
+    it: "Auto Refresh ricarica automaticamente qualsiasi scheda all'intervallo scelto — per scheda, con preset comodi, timer personalizzato (secondi o minuti), badge nella barra e ripresa facoltativa dopo il riavvio. Temi chiaro e scuro che seguono il sistema. Funziona tutto in locale: nessun dato raccolto e nessuna richiesta di rete.",
+    ru: "Auto Refresh автоматически перезагружает любую вкладку с выбранным интервалом — для каждой вкладки, с удобными пресетами, своим таймером (секунды или минуты), значком на панели и необязательным возобновлением после перезапуска. Светлая и тёмная темы, следующие за системой. Всё работает локально: данные не собираются, сетевые запросы не выполняются.",
+    zh_CN: "Auto Refresh 按你选择的间隔自动刷新任意标签页——逐标签设置，含便捷预设、自定义计时器（秒或分钟）、工具栏角标，以及可选的重启后自动恢复。浅色与深色主题，跟随系统。一切均在本地运行：不收集任何数据，也不发起网络请求。",
+    zh_TW: "Auto Refresh 依你選擇的間隔自動重新整理任意分頁——逐分頁設定，含便捷預設、自訂計時器（秒或分鐘）、工具列角標，以及可選的重新啟動後自動恢復。淺色與深色主題，跟隨系統。一切皆在本機執行：不收集任何資料，也不發出網路請求。",
+    ko: "Auto Refresh는 선택한 간격으로 모든 탭을 자동으로 새로고침합니다 — 탭별 설정, 편리한 프리셋, 사용자 지정 타이머(초 또는 분), 툴바 배지, 재시작 후 자동 재개(선택)를 지원합니다. 시스템을 따르는 밝은/어두운 테마. 모든 작업은 로컬에서 실행되며 데이터를 수집하거나 네트워크 요청을 하지 않습니다.",
+  },
   popupWidth: 280,
   popupHeight: 345,
   zoom: 1.7,
@@ -147,48 +162,88 @@ function escapeHtml(s) {
   return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
+const LANG_NAME = {
+  en: "English", ja: "日本語", es: "Español", pt_BR: "Português (BR)", fr: "Français",
+  de: "Deutsch", it: "Italiano", ru: "Русский", zh_CN: "简体中文", zh_TW: "繁體中文", ko: "한국어",
+};
+
+// Top-to-bottom, all-language submission walkthrough.
 function submissionDoc(cfg, listing) {
-  const langs = Object.keys(cfg.promoHead).join(", ");
-  return `# Submission packet — ${cfg.storeName} (v${cfg.version})
+  const langs = Object.keys(cfg.promoHead);
+  const rows = langs
+    .map((l) => `| ${l} — ${LANG_NAME[l] || l} | \`${l}/screenshot-1280x800.png\` | \`${l}/promo-tile-440x280.png\` |`)
+    .join("\n");
+  const descs = langs
+    .map((l) => `### ${LANG_NAME[l] || l} (${l})\n\n${cfg.desc[l] || cfg.desc.en}`)
+    .join("\n\n");
 
-Self-contained: every value for the Chrome Web Store / Edge forms is in THIS
-folder. The long Description text is in section D below.
+  return `# Submission — ${cfg.storeName} (v${cfg.version}) — step by step
 
-## A. Store listing form
-| Field | Value |
-| --- | --- |
-| Title | ${cfg.storeName} |
-| Summary — EN (<=132) | ${cfg.summaryEN} |
-| Summary — JA (<=132) | ${cfg.summaryJA} |
-| Description | paste "Detailed description" from section D (EN / 日本語) |
-| Category | ${cfg.category} |
-| Language | English (primary); add others as locales |
-| Store icon (128x128) | store-icon-128.png |
-| Screenshots (1280x800) | per-locale: <lang>/screenshot-1280x800.png (default: screenshot-1280x800.png) |
-| Promo tile, small (440x280) | per-locale: <lang>/promo-tile-440x280.png |
-| Marquee tile (1400x560) | optional — not provided |
-| Homepage URL | ${cfg.homepage} |
-| Support URL | ${cfg.support} |
-| Mature content | No |
-| Visibility | Public |
+Follow top to bottom. The **Title** and **Summary** are taken automatically from
+the extension package (already localized into all ${langs.length} languages), so
+per language you only set the **Description** and upload the **localized
+screenshot**. Everything you need is in this folder (per-locale images in
+\`<lang>/\` subfolders).
 
-Localized screenshots/tiles available for: ${langs}
+## Step 0 — Before you start
+- Host the privacy policy and confirm the URL opens: ${cfg.privacy}
+  (text: \`privacy-policy.md\` in this folder)
+- Accounts: Chrome Web Store developer (\$5 one-time) / Edge Partner Center (free).
 
-## B. Privacy practices tab
-- Single purpose: see section D ("Single purpose" / 単一目的)
-- Permission justifications: see section D ("Permission justifications" / 権限の正当化)
-- Permissions in this build: ${cfg.perms}
-- Uses remote code? No
-- Data collection: none — then tick the 3 certifications
+## Step 1 — Create the item & upload the package
+1. Chrome Web Store Developer Dashboard → **New item**.
+2. Upload \`../${cfg.zip}\`.
+
+## Step 2 — All-languages (default) assets  [required, once]
+Under **「全言語向けアセット」 / All-languages assets**:
+- Store icon (128×128): \`store-icon-128.png\`
+- All-languages screenshot (fallback for any language): \`en/screenshot-1280x800.png\`
+- Promo tile 440×280 (optional): \`en/promo-tile-440x280.png\`
+- Marquee 1400×560: skip
+
+## Step 3 — Other fields (set once, 「すべての言語用」)
+- Category: ${cfg.category}
+- Homepage URL: ${cfg.homepage}
+- Support URL: ${cfg.support}
+- Mature content: **No**
+- Visibility: **Public**
+
+## Step 4 — Per-language listing (repeat for each language)
+Switch **「編集中の言語」 / Editing language**, then for that language:
+1. Description: paste the text from Step 5 for that language.
+2. Localized screenshot (「ローカライズ版スクリーンショット」): upload that language's file.
+(Title & Summary fill in automatically.)
+
+| Language | Localized screenshot | Localized tile |
+| --- | --- | --- |
+${rows}
+
+Minimum: do **English + 日本語**. The other languages can be added anytime —
+until then those users see the auto-localized title/summary + the all-languages
+(English) screenshot.
+
+## Step 5 — Descriptions to paste (per language)
+
+${descs}
+
+## Step 6 — Privacy practices tab
+- Single purpose: ${cfg.singlePurpose}
+- Permissions in this build: ${cfg.perms} — justification wording is in the Appendix.
+- Uses remote code? **No**
+- Data collection: **none** → tick the 3 certifications (no selling, single-purpose only, not for creditworthiness)
 - Privacy policy URL: ${cfg.privacy}
-- Privacy policy text (already hosted; local copy): privacy-policy.md
 
-## C. Package to upload
-- ../${cfg.zip}
+## Step 7 — Submit
+Click **Submit for review**. Review takes hours–days (broad permissions take longer).
+
+## Step 8 — Microsoft Edge Add-ons (same package)
+1. Partner Center → new extension → upload \`../${cfg.zip}\`.
+2. Reuse the same descriptions / screenshots / URLs above.
+3. Privacy: same policy URL, no data collected → **Publish**.
 
 ---
 
-## D. Listing text — full (EN + JA)
+## Appendix — EN/JA listing reference (summaries + permission justifications)
 
 ${listing}
 `;
