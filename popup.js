@@ -23,12 +23,24 @@ const addPresetBtn = document.getElementById("addPresetBtn");
 const rememberToggle = document.getElementById("rememberToggle");
 const saveSettingsBtn = document.getElementById("saveSettingsBtn");
 
-// ---- Theme (light / dark) ----
+// ---- Theme: default light, follow system, manual override remembered ----
+let manualTheme; // "light" | "dark" | undefined (= follow system)
+
 function applyTheme(theme) {
   document.documentElement.setAttribute("data-theme", theme);
 }
 
+const prefersDark = () =>
+  window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+// Stored manual choice wins; otherwise follow the system; default light.
+function resolveTheme(stored) {
+  if (stored === "light" || stored === "dark") return stored;
+  return prefersDark() ? "dark" : "light";
+}
+
 function setTheme(theme) {
+  manualTheme = theme;
   applyTheme(theme);
   chrome.storage.local.set({ theme });
 }
@@ -38,9 +50,19 @@ themeToggle.addEventListener("click", () => {
   setTheme(current === "dark" ? "light" : "dark");
 });
 
+// Follow OS theme changes while no manual choice is stored.
+if (window.matchMedia) {
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+    if (manualTheme !== "light" && manualTheme !== "dark") {
+      applyTheme(e.matches ? "dark" : "light");
+    }
+  });
+}
+
 // ---- Load persisted settings, then initialize ----
 chrome.storage.local.get(["theme", "presets", "rememberState"], (data) => {
-  applyTheme(data.theme === "light" ? "light" : "dark");
+  manualTheme = data.theme;
+  applyTheme(resolveTheme(data.theme));
   if (Array.isArray(data.presets) && data.presets.length) {
     presets = data.presets;
   }
