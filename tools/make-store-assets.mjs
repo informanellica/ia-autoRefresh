@@ -22,7 +22,7 @@ const CONFIG = {
   zip: "auto-refresh-v1.0.2.zip",
   uiLocale: "ja",
   privacy: "https://informanellica.github.io/ia-autoRefresh/PRIVACY",
-  category: "Tools(ツール)/ Productivity",
+  category: "ツール (Tools) ／ 代替: ワークフローと計画",
   perms: "tabs, storage",
   version: "1.0.2",
   summaryEN: "Automatically reload any tab at the interval you choose — per tab, with presets, a custom timer, and an at-a-glance badge.",
