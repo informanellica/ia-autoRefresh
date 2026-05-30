@@ -19,12 +19,12 @@ const OUT = path.join(ROOT, "dist", "store-assets");
 
 const CONFIG = {
   storeName: "Auto Refresh",
-  zip: "auto-refresh-v1.0.3.zip",
+  zip: "auto-refresh-v1.1.0.zip",
   uiLocale: "ja",
   privacy: "https://informanellica.github.io/ia-autoRefresh/PRIVACY",
   category: "ツール (Tools) ／ 代替: ワークフローと計画",
   perms: "tabs, storage",
-  version: "1.0.3",
+  version: "1.1.0",
   summaryEN: "Automatically reload any tab at the interval you choose — per tab, with presets, a custom timer, and an at-a-glance badge.",
   summaryJA: "指定した間隔でタブを自動再読み込み。タブごとに設定でき、プリセット・カスタム間隔・ひと目で分かるバッジ付き。",
   homepage: "https://informanellica.github.io/",
